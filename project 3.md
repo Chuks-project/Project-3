@@ -330,10 +330,8 @@ DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites
  - You shall see a message ‘Database connected successfully’ as shown in the image below, if so – we have our backend configured:
    
   
-   
-   ![Server running on port 500 and Database connected](https://user-images.githubusercontent.com/65022146/189608422
-   -b3049b08-791d-484f-994b-6e5fd4b6a9b0.png)
-   
+   ![Server running and Database connected](https://user-images.githubusercontent.com/65022146/189633948-8a0ea2e4-b5a6-4788-9109-9c57036de042.png)
+
    
    
    - Postman is a tool that is used to manually test Api endpoints. You should see something like the image below if our endpoints work perfectly using the POST request as an example:
