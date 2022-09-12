@@ -334,6 +334,8 @@ DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites
 
    
    
+
+   
    - Postman is a tool that is used to manually test Api endpoints. You should see something like the image below if our endpoints work perfectly using the POST request as an example:
    
  
