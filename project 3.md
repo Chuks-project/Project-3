@@ -91,27 +91,23 @@ You should see an image like the one below on your terminal:
 
 - In the blank open file, paste and save the text below:
 
- 
+```
  const express = require('express');
   require('dotenv').config();
-
-  const app = express();
-
-  const port = process.env.PORT || 5000;
-
+const app = express();
+ const port = process.env.PORT || 5000;
   app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "\*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
   });
-
-  app.use((req, res, next) => {
+app.use((req, res, next) => {
   res.send('Welcome to Express');
   });
-
-  app.listen(port, () => {
+app.listen(port, () => {
   console.log(`Server running on port ${port}`)
   });
+```
 
 
 - Now run the command below:
@@ -157,23 +153,17 @@ For each task, we need to create routes that will define various endpoints that 
 - In the blank file paste text below and save the file:
 
 
+```
 const express = require ('express');
   const router = express.Router();
-
-  router.get('/todos', (req, res, next) => {
-
+ router.get('/todos', (req, res, next) => {
   });
-
   router.post('/todos', (req, res, next) => {
-
   });
-
   router.delete('/todos/:id', (req, res, next) => {
-
   })
-
   module.exports = router;
-
+```
 
 
 
@@ -197,47 +187,41 @@ npm install mongoose
 
    touch todo.js
 
-Open the file created with vi todo.js then paste the code below in the file:
+- Open the file created with vi todo.js then paste the code below in the file:
 
 
-
+```
 const mongoose = require('mongoose');
    const Schema = mongoose.Schema;
-
-  //create schema for todo
+//create schema for todo
   const TodoSchema = new Schema({
   action: {
   type: String,
   required: [true, 'The todo text field is required']
   }
   })
-
-  //create model for todo
+//create model for todo
   const Todo = mongoose.model('todo', TodoSchema);
-
-  module.exports = Todo;
-  
+ module.exports = Todo;
+```  
   
   
   - Now we need to update our routes from the file api.js in ‘routes’ directory to make use of the new model.
 
-In Routes directory, open api.js with vim api.js, delete the code inside with :%d command and paste there code below into it then save and exit
+In Routes directory, open api.js with vim api.js, delete the code inside with :%d command and paste there code below into it then save and exit:
 
 
-
+```
    const express = require ('express');
    const router = express.Router();
    const Todo = require('../models/todo');
-
-   router.get('/todos', (req, res, next) => {
-
-   //this will return all the data, exposing only the id and action field to the client
+router.get('/todos', (req, res, next) => {
+ //this will return all the data, exposing only the id and action field to the client
    Todo.find({}, 'action')
    .then(data => res.json(data))
    .catch(next)
    });
-
-   router.post('/todos', (req, res, next) => {
+ router.post('/todos', (req, res, next) => {
    if(req.body.action){
    Todo.create(req.body)
    .then(data => res.json(data))
@@ -248,15 +232,13 @@ In Routes directory, open api.js with vim api.js, delete the code inside with :%
    })
    }
    });
-
-   router.delete('/todos/:id', (req, res, next) => {
+ router.delete('/todos/:id', (req, res, next) => {
    Todo.findOneAndDelete({"_id": req.params.id})
    .then(data => res.json(data))
    .catch(next)
    })
-
-   module.exports = router;
-   
+ module.exports = router;
+```   
   
   
 # MongoDB Database
@@ -269,12 +251,13 @@ In the index.js file, we specified process.env to access environment variables, 
 - Create a file in your Todo directory and name it .env.
 
 touch .env
+
 vi .env
 
 
 - Add the connection string to access the database in it, just as below:
 
-DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority'
+   DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority'
 
    
   
@@ -282,7 +265,7 @@ DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites
 
 - Delete the content of index.js, paste the text below and save the file:
 
-   
+   ```
       const express = require('express');
    const bodyParser = require('body-parser');
    const mongoose = require('mongoose');
@@ -320,37 +303,37 @@ DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites
    app.listen(port, () => {
    console.log(`Server running on port ${port}`)
    });
+```   
    
-   
-   
- - Start your server using the command:
-
-    node index.js
-   
- - You shall see a message ‘Database connected successfully’ as shown in the image below, if so – we have our backend configured:
-   
-  
-   ![Server running and Database connected](https://user-images.githubusercontent.com/65022146/189633948-8a0ea2e4-b5a6-4788-9109-9c57036de042.png)
-
-   
-   
-
-   
-   - Postman is a tool that is used to manually test Api endpoints. You should see something like the image below if our endpoints work perfectly using the POST request as an example:
    
  
-   ![POST request to API](https://user-images.githubusercontent.com/65022146/189633234-ecc7b464-2f1f-4026-ab7b-3891d16e5ee4.png)
+   - Start your server using the command:
+
+      node index.js
+   
+  -You shall see a message ‘Database connected successfully’ as shown in the image below, if so – we have our backend configured:
+   
+  ![Server running and Database connected](https://user-images.githubusercontent.com/65022146/189633948-8a0ea2e4-b5a6-4788-9109-9c57036de042.png)
+
+   
+   - Postman is a tool that is used to manually test Api endpoints. You should see something like the image below if our endpoints work perfectly using the POST      request as an example:
+   
+ ![POST request to API](https://user-images.githubusercontent.com/65022146/189633234-ecc7b464-2f1f-4026-ab7b-3891d16e5ee4.png)
 
    
    
-   Step 2 – Frontend creation
-Since we are done with the functionality we want from our backend and API, it is time to create a user interface for a Web client (browser) to interact with the application via API. To start out with the frontend of the To-do app, we will use the create-react-app command to scaffold our app.
+
+   
+   # Step 2 – Frontend creation
+
+ Since we are done with the functionality we want from our backend and API, it is time to create a user interface for a Web client (browser) to interact with the application via API. To start out with the frontend of the To-do app, we will use the create-react-app command to scaffold our app.
 
 - In the same root directory as your backend code, which is the Todo directory, run:
 
    npx create-react-app client
 
-Running a React App
+
+   Running a React App
 
    
 - Install concurrently with the command below:
@@ -363,12 +346,13 @@ Running a React App
 
 - In Todo folder open the package.json file. Change the highlighted part of the below screenshot and replace with the code below.
    
-      "scripts": {
+ ```
+   "scripts": {
    "start": "node index.js",
    "start-watch": "nodemon index.js",
    "dev": "concurrently \"npm run start-watch\" \"cd client && npm start\""
    },
-   
+```   
    
    
    
@@ -417,8 +401,8 @@ Running a React App
 
 - Copy and paste the code below:
    
-   
-       import React, { Component } from 'react';
+ ```  
+    import React, { Component } from 'react';
     import axios from 'axios';
 
     class Input extends Component {
@@ -463,7 +447,7 @@ Running a React App
   }
 
  export default Input
-   
+```   
 
    
 - Install Axios: A http client using the commands below:
@@ -480,7 +464,7 @@ Running a React App
 
 - In the ListTodo.js copy and paste the following code:
    
-   
+   ```
        import React from 'react';
 
     const ListTodo = ({ todos, deleteTodo }) => {
@@ -507,14 +491,14 @@ Running a React App
     }
 
     export default ListTodo
-    
+    ```
    
    
    
    - Then in your Todo.js file you write the following code:
    
-   
-      import React, {Component} from 'react';
+``` 
+   import React, {Component} from 'react';
    import axios from 'axios';
 
    import Input from './Input';
@@ -569,7 +553,7 @@ Running a React App
 }
 
 export default Todo;
-   
+```   
    
 - Delete the logo and adjust our App.js to look like this.
 
@@ -577,11 +561,11 @@ export default Todo;
 
    cd .. && vi App.js
 
-- Paste the text below into the file:
-   
+- Paste the text below into the file:   
+ 
+   ```
    import React from 'react';
-
-   import Todo from './components/Todo';
+import Todo from './components/Todo';
    import './App.css';
 
    const App = () => {
@@ -594,6 +578,7 @@ export default Todo;
    import React from 'react';
 
    export default App;
+   ```
    
   
    
@@ -604,7 +589,7 @@ export default Todo;
 - Then paste the following code into App.css:
    
    
-   
+ ```  
        .App {
     text-align: center;
     font-size: calc(10px + 2vmin);
@@ -692,7 +677,7 @@ export default Todo;
    margin-top: 0;
    }
    }
-   
+```   
    
    
    
@@ -703,7 +688,7 @@ export default Todo;
 - Copy and paste the code below:
    
    
-   
+ ```  
        body {
     margin: 0;
     padding: 0;
@@ -721,7 +706,7 @@ export default Todo;
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
     }
-   
+ ```  
    
    
 - Go to the Todo directory with the command below:
@@ -733,10 +718,7 @@ export default Todo;
    npm run dev
    
    
-   In absence of any errors when saving all these files, our To-Do app should be ready and fully functional. Just refresh your browser and you will find an image like the one below:
-   
-
-   
-   ![my todo App running successfully](https://user-images.githubusercontent.com/65022146/189630354-2509516b-fdda-4032-aeb3-cdd20ec18247.png)
+   In absence of any errors when saving all these files, our To-Do app should be ready and fully functional. Just refresh your browser and you will find an image like    the one below:
+    ![my todo App running successfully](https://user-images.githubusercontent.com/65022146/189630354-2509516b-fdda-4032-aeb3-cdd20ec18247.png)
 
    
