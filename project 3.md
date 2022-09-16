@@ -1,7 +1,7 @@
 # SIMPLE TO-DO APPLICATION ON MERN WEB STACK
 
 In this project, you are tasked to implement a web solution based on MERN stack in AWS Cloud.
-
+![alt text](https://github.com/Chuks-project/Project-3/blob/main/Project%203%20Images/App%20running.png)
 # MERN Web stack consists of following components:
 
 - MongoDB: A document-based, No-SQL database used to store application data in a form of documents.
