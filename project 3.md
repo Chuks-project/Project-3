@@ -1,7 +1,8 @@
+
+
 # SIMPLE TO-DO APPLICATION ON MERN WEB STACK
 
 In this project, you are tasked to implement a web solution based on MERN stack in AWS Cloud.
-![alt text](https://github.com/Chuks-project/Project-3/blob/main/Project%203%20Images/my%20todo%20App%20running%20successfully.png)
 # MERN Web stack consists of following components:
 
 - MongoDB: A document-based, No-SQL database used to store application data in a form of documents.
@@ -22,25 +23,25 @@ As seen in project 1 & 2, this project require will need an AWS account and a vi
 
 - Update ubuntu:
 
-   sudo apt update
+   `sudo apt update`
 
 - Upgrade ubuntu:
 
-  sudo apt upgrade
+  `sudo apt upgrade`
 
 - Lets get the location of Node.js software from Ubuntu repositories:
 
-   curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+  ` curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -`
 
 - Install Node.js with the command below:
 
-   sudo apt-get install -y nodejs
+   `sudo apt-get install -y nodejs`
 
 - The command above installs both Node and NPM packages.
 
 - To Verify the version of Nodejs and NPM installed, run the command below:
 
-    node -v; npm -v
+    `node -v; npm -v`
 
 You should see an image like the one below on your terminal:
 
@@ -51,15 +52,15 @@ You should see an image like the one below on your terminal:
 
 - Create a new directory for your To-Do project:
 
-   mkdir Todo
+   `mkdir Todo`
 
 - Changed into Todo directory with the command below:
 
-   cd Todo
+   `cd Todo`
 
 - Initialise a project by running the command below:
 
-   npm init
+   `npm init`
 
 
 - When prompted answer accordingly and you should see something like the screenshot below:
@@ -75,19 +76,19 @@ You should see an image like the one below on your terminal:
 
 - Install Express using npm:
 
-   npm install express
+   `npm install express`
 
 - create a file index.js with the command below:
 
-   touch index.js
+   `touch index.js`
 
 - Install the dotenv module:
 
-  npm install dotenv
+  `npm install dotenv`
 
 - Open the index.js file with the command below:
 
-   vi index.js
+   `vi index.js`
 
 - In the blank open file, paste and save the text below:
 
@@ -107,12 +108,12 @@ app.use((req, res, next) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
   });
+  
 ```
-
 
 - Now run the command below:
 
-   node index.js
+  ` node index.js`
 
 - You should find something like the image below:
 
@@ -136,19 +137,19 @@ For each task, we need to create routes that will define various endpoints that 
 
 - Lets create Routes folder with the command below:
 
-   mkdir routes
+   `mkdir routes`
 
 - Change directory to routes folder:
 
-   cd routes
+   `cd routes`
 
 - create a file api.js with the command below:
 
-   touch api.js
+   `touch api.js`
 
 - Open the file with the command below:
 
-   vim api.js
+   `vim api.js`
 
 - In the blank file paste text below and save the file:
 
@@ -163,6 +164,7 @@ const express = require ('express');
   router.delete('/todos/:id', (req, res, next) => {
   })
   module.exports = router;
+  
 ```
 
 
@@ -173,19 +175,19 @@ Since the App will be interacting with a NOSQL database in this case Mongodb, We
 
 Change directory back Todo folder with cd .. and install Mongoose with the command below:
 
-npm install mongoose
+`npm install mongoose`
 
 - Create a new folder models :
 
-    mkdir models
+   ` mkdir models`
 
 - Change directory into the newly created ‘models’ folder with:
 
-    cd models
+    `cd models`
 
 - Inside the models folder, create a file and name it todo.js:
 
-   touch todo.js
+   `touch todo.js`
 
 - Open the file created with vi todo.js then paste the code below in the file:
 
@@ -203,12 +205,13 @@ const mongoose = require('mongoose');
 //create model for todo
   const Todo = mongoose.model('todo', TodoSchema);
  module.exports = Todo;
+ 
 ```  
   
   
-  - Now we need to update our routes from the file api.js in ‘routes’ directory to make use of the new model.
+- Now we need to update our routes from the file api.js in ‘routes’ directory to make use of the new model.
 
-In Routes directory, open api.js with vim api.js, delete the code inside with :%d command and paste there code below into it then save and exit:
+- In Routes directory, open api.js with vim api.js, delete the code inside with :%d command and paste there code below into it then save and exit:
 
 
 ```
@@ -238,6 +241,7 @@ router.get('/todos', (req, res, next) => {
    .catch(next)
    })
  module.exports = router;
+ 
 ```   
   
   
@@ -250,23 +254,22 @@ In the index.js file, we specified process.env to access environment variables, 
 
 - Create a file in your Todo directory and name it .env.
 
-touch .env
+`touch .env`
 
-vi .env
+`vi .env`
 
 
 - Add the connection string to access the database in it, just as below:
 
-   DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority'
+ ` DB = "mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority"` 
 
    
   
-   Now we need to update the index.js to reflect the use of .env so that Node.js can connect to the database.
+  Now we need to update the index.js to reflect the use of .env so that Node.js can connect to the database.
 
 - Delete the content of index.js, paste the text below and save the file:
-
-   ```
-      const express = require('express');
+``` 
+   const express = require('express');
    const bodyParser = require('body-parser');
    const mongoose = require('mongoose');
    const routes = require('./routes/api');
@@ -303,13 +306,12 @@ vi .env
    app.listen(port, () => {
    console.log(`Server running on port ${port}`)
    });
+    
+   
 ```   
-   
-   
- 
-   - Start your server using the command:
+ - Start your server using the command:
 
-      node index.js
+     `node index.js`
    
   -You shall see a message ‘Database connected successfully’ as shown in the image below, if so – we have our backend configured:
    
@@ -330,7 +332,7 @@ vi .env
 
 - In the same root directory as your backend code, which is the Todo directory, run:
 
-   npx create-react-app client
+   `npx create-react-app client`
 
 
    Running a React App
@@ -338,11 +340,11 @@ vi .env
    
 - Install concurrently with the command below:
 
- npm install concurrently --save-dev
+ `npm install concurrently --save-dev`
 
 - Install nodemon with the command below:
 
-  npm install nodemon --save-dev
+  `npm install nodemon --save-dev`
 
 - In Todo folder open the package.json file. Change the highlighted part of the below screenshot and replace with the code below.
    
@@ -352,6 +354,7 @@ vi .env
    "start-watch": "nodemon index.js",
    "dev": "concurrently \"npm run start-watch\" \"cd client && npm start\""
    },
+   
 ```   
    
    
@@ -360,44 +363,44 @@ vi .env
 
 - Change directory to ‘client’ with the command below:
 
-   cd client
+   `cd client`
 
 - Open the package.json file:
 
-   vi package.json
+   `vi package.json`
 
 - Add the key value pair in the package.json file "proxy": "http://localhost:5000" The whole purpose of adding the proxy configuration in number 3 above is to make it possible to access the application directly from the browser by simply calling the server url like http://localhost:5000 rather than always including the entire path like http://localhost:5000/api/todos
 
 - Now, ensure you are inside the Todo directory, and simply do:
 
-   npm run dev
+   `npm run dev`
 
 - This should start the app on port 3000
 
 - Creating your React Components
 - From your Todo directory run the command below:
 
-   cd client
+   `cd client`
 
 - move to the src directory
 
-  cd src
+  `cd src`
 
 - Inside your src folder create another folder called components:
 
-  mkdir components
+  `mkdir components`
 
 - Move into the components directory with the command below:
 
-  cd components
+  `cd components`
 
 - Inside ‘components’ directory create three files Input.js, ListTodo.js and Todo.js:
 
-   touch Input.js ListTodo.js Todo.js
+   `touch Input.js ListTodo.js Todo.js`
 
 - Open Input.js file:
 
-   vi Input.js
+   `vi Input.js`
 
 - Copy and paste the code below:
    
@@ -447,20 +450,21 @@ vi .env
   }
 
  export default Input
+ 
 ```   
 
    
 - Install Axios: A http client using the commands below:
 
-  cd ..; cd ..; npm install axios;
+ ` cd ..; cd ..; npm install axios;`
 
 - Go to ‘components’ directory:
 
-   cd src/components
+   `cd src/components`
 
 - After that open your ListTodo.js:
 
-  vi ListTodo.js
+  `vi ListTodo.js`
 
 - In the ListTodo.js copy and paste the following code:
    
@@ -491,7 +495,8 @@ vi .env
     }
 
     export default ListTodo
-    ```
+    
+  ```
    
    
    
@@ -553,19 +558,20 @@ vi .env
 }
 
 export default Todo;
+
 ```   
    
 - Delete the logo and adjust our App.js to look like this.
 
 - Open App.js file by running the command below:
 
-   cd .. && vi App.js
+   `cd .. && vi App.js`
 
 - Paste the text below into the file:   
  
    ```
    import React from 'react';
-import Todo from './components/Todo';
+   import Todo from './components/Todo';
    import './App.css';
 
    const App = () => {
@@ -578,13 +584,15 @@ import Todo from './components/Todo';
    import React from 'react';
 
    export default App;
+   
+   
    ```
    
   
    
  - In the src directory open the App.css with the command below:
 
-    vi App.css
+    `vi App.css`
 
 - Then paste the following code into App.css:
    
@@ -677,13 +685,14 @@ import Todo from './components/Todo';
    margin-top: 0;
    }
    }
+   
 ```   
    
    
    
 - In the src directory open the index.css with the command below:
 
-   vi index.css
+   `vi index.css`
 
 - Copy and paste the code below:
    
@@ -706,19 +715,22 @@ import Todo from './components/Todo';
     font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
     }
+    
  ```  
    
    
 - Go to the Todo directory with the command below:
 
-  cd ../..
+  `cd ../..`
 
 - When you are in the Todo directory run:
 
-   npm run dev
+  ` npm run dev`
    
    
-   In absence of any errors when saving all these files, our To-Do app should be ready and fully functional. Just refresh your browser and you will find an image like    the one below:
-    ![my todo App running successfully](https://user-images.githubusercontent.com/65022146/189630354-2509516b-fdda-4032-aeb3-cdd20ec18247.png)
+- In absence of any errors when saving all these files, our To-Do app should be ready and fully functional. Just refresh your browser and you will find an image like    the one below:
+    
+    
+![alt text](https://github.com/Chuks-project/Project-3/blob/main/Project%203%20Images/my%20todo%20App%20running%20successfully.png)
 
    
